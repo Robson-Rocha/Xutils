@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Authors>RobsonROX</Authors>
+    <Product>Xutils.Extensions.ASPNETCore</Product>
+    <Description>Common extension methods for ASP.NET Core Projects</Description>
+    <PackageIconUrl>https://github.com/Robson-Rocha/Xutils/raw/master/docs/xutils-nuget.png</PackageIconUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/robson-rocha/xutils</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright ©2019 Robson Rocha de Araújo</Copyright>
+    <PackageLicenseUrl>https://github.com/Robson-Rocha/Xutils/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>extension methods</PackageTags>
+    <Company>Robson Rocha de Araújo</Company>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <Version>1.0.0</Version>  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>

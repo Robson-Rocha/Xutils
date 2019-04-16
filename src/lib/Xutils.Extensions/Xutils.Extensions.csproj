@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Authors>RobsonROX</Authors>
+    <Product>Xutils.Extensions</Product>
+    <Description>Common extension methods</Description>
+    <PackageIconUrl>https://github.com/Robson-Rocha/Xutils/raw/master/docs/xutils-nuget.png</PackageIconUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/robson-rocha/xutils</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright ©2019 Robson Rocha de Araújo</Copyright>
+    <PackageLicenseUrl>https://github.com/Robson-Rocha/Xutils/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>extension methods</PackageTags>
+    <Company>Robson Rocha de Araújo</Company>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <Version>1.0.0</Version>  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mime-Detective" Version="0.0.5" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
