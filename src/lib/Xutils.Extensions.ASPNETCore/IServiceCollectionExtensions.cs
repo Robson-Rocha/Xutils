@@ -239,13 +239,13 @@ namespace Xutils.Extensions.ASPNETCore
                         .Select(m => m.MethodInfo)
                         .First();
 
-                foreach (Type type in hintType.Assembly.GetTypes().Where(t => t.IsClass))
+                foreach (Type type in hintType.Assembly.GetTypes().Where(t => t.IsClass && t.ContainsGenericParameters))
                 {
                     foreach (Type interfaceType in
                         type.GetInterfaces().Where(i =>
                             i.IsGenericType && referenceInterfaceType.IsAssignableFrom(i.GetGenericTypeDefinition())))
                     {
-                        containerMethod.Invoke(null, new object[] { services, interfaceType, type });
+                        containerMethod.Invoke(null, new object[] { services, interfaceType.GetGenericTypeDefinition(), type.GetGenericTypeDefinition() });
                     }
                 }
 
@@ -261,7 +261,7 @@ namespace Xutils.Extensions.ASPNETCore
 
                 //Adds all the types that implement the reference interface
                 foreach (Type type in hintType.Assembly.GetTypes().Where(t =>
-                    ((TypeInfo)t).ImplementedInterfaces.Contains(referenceInterfaceType) && t.IsClass))
+                    ((TypeInfo)t).ImplementedInterfaces.Contains(referenceInterfaceType) && t.IsClass && !t.ContainsGenericParameters))
                     containerMethod.MakeGenericMethod(type).Invoke(null, new object[] { services });
             }
         }
