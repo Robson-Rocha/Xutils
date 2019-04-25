@@ -13,17 +13,7 @@ namespace Xutils.Extensions.ASPNETCore
     public static class AspNetCoreExtensions
     {
         private static TOptions OptionsFactory<TOptions>(IServiceProvider serviceProvider, string sectionName = null)
-        {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            Type optionsType = typeof(TOptions);
-            // ReSharper disable once PossibleNullReferenceException
-            string typeName = optionsType.FullName.Split('.').Last();
-            if (typeName.EndsWith("options", true, CultureInfo.InvariantCulture))
-                typeName = typeName.Substring(0, typeName.Length - 7);
-            TOptions options = Activator.CreateInstance<TOptions>();
-            configuration.GetSection(sectionName ?? typeName).Bind(options);
-            return options;
-        }
+            => serviceProvider.GetService<IConfiguration>().GetOptions<TOptions>(sectionName);
 
         /// <summary>
         /// Binds a configuration section to an instance of an option type.

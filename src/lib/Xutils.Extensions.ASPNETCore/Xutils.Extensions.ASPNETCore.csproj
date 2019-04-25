@@ -14,8 +14,8 @@
     <PackageLicenseUrl>https://github.com/Robson-Rocha/Xutils/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>extension methods</PackageTags>
     <Company>Robson Rocha de Araújo</Company>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <Version>1.0.1</Version>  
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <Version>1.0.2</Version>  
   </PropertyGroup>
 
   <ItemGroup>
