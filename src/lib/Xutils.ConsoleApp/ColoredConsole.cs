@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml;
 using System.Linq;
-using McMaster.Extensions.CommandLineUtils;
 using System.IO;
 
 namespace Xutils.ConsoleApp
@@ -9,7 +8,7 @@ namespace Xutils.ConsoleApp
     /// <summary>
     /// Contains helper methods to write on the console using colors based on special tags in the text contents.
     /// </summary>
-    public class ColoredConsole : IConsole
+    public class ColoredConsole : IColoredConsole
     {
         public TextWriter Out => Console.Out;
 
@@ -269,5 +268,9 @@ namespace Xutils.ConsoleApp
         }
 
         public void ResetColor() => Console.ResetColor();
+
+        private static Lazy<ColoredConsole> singletonColoredConsole = new Lazy<ColoredConsole>();
+
+        public static ColoredConsole Singleton { get => singletonColoredConsole.Value; }
     }
 }

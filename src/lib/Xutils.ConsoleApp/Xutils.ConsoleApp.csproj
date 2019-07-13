@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
     <Authors>RobsonROX</Authors>
     <Product>Xutils.ConsoleApp</Product>
-    <Description>Utilitary classes for Console Applications (namely ColoredConsole)</Description>
+    <Description>Utility classes for Console Applications (namely ColoredConsole)</Description>
     <PackageIconUrl>https://github.com/Robson-Rocha/Xutils/raw/master/docs/xutils-nuget.png</PackageIconUrl>
     <RepositoryUrl></RepositoryUrl>
     <PackageProjectUrl>https://github.com/robson-rocha/xutils</PackageProjectUrl>
@@ -14,8 +14,8 @@
     <PackageLicenseUrl>https://github.com/Robson-Rocha/Xutils/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>extension methods, console, color</PackageTags>
     <Company>Robson Rocha de Araújo</Company>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.5</AssemblyVersion>
+    <Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
