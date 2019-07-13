@@ -87,6 +87,11 @@ namespace Xutils.ConsoleApp
                 case "darkgrey":
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     break;
+
+                case "k":
+                case "black":
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    break;
             }
         }
 
@@ -168,6 +173,11 @@ namespace Xutils.ConsoleApp
                 case "darkgrey":
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                     break;
+
+                case "k":
+                case "black":
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    break;
             }
         }
 
@@ -176,7 +186,11 @@ namespace Xutils.ConsoleApp
         /// </summary>
         /// <param name="text">Text to be written on the Console, optionally contaning tags for defining foreground and background colors, and numeric placeholders for replacing with the <paramref name="args"/>.</param>
         /// <param name="args">Additional values which can be replaced in the given <paramref name="text"/> for the equivalent placeholders.</param>
-        public static void WriteLine(string text, params string[] args) => Write($"{text}\r\n", args);
+        public static void WriteLine(string text, params string[] args)
+        {
+            Write($"{text}\r\n", args);
+            Console.WriteLine();
+        }
 
         /// <summary>
         /// Writes the given <paramref name="text"/> on the Console, using colors provided by tags in the text.
@@ -197,9 +211,7 @@ namespace Xutils.ConsoleApp
                                select node;
             foreach (var fragment in xmlFragments)
             {
-                if (fragment.NodeType == XmlNodeType.Text)
-                    Console.Write(fragment.OuterXml.Replace("&lt;", "<").Replace("&gt;", ">"));
-                else
+                if (fragment.NodeType == XmlNodeType.Element)
                 {
                     var currentForeColor = Console.ForegroundColor;
                     var currentBackColor = Console.BackgroundColor;
@@ -225,6 +237,10 @@ namespace Xutils.ConsoleApp
                     Write(fragment.InnerXml);
                     Console.BackgroundColor = currentBackColor;
                     Console.ForegroundColor = currentForeColor;
+                }
+                else
+                {
+                    Console.Write(fragment.OuterXml.Replace("&lt;", "<").Replace("&gt;", ">"));
                 }
             }
         }
