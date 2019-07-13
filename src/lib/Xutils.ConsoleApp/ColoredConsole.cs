@@ -1,182 +1,205 @@
 ﻿using System;
 using System.Xml;
 using System.Linq;
+using McMaster.Extensions.CommandLineUtils;
+using System.IO;
 
 namespace Xutils.ConsoleApp
 {
     /// <summary>
     /// Contains helper methods to write on the console using colors based on special tags in the text contents.
     /// </summary>
-    public static class ColoredConsole
+    public class ColoredConsole : IConsole
     {
-        private static void SetForeColor(string colorName)
+        public TextWriter Out => Console.Out;
+
+        public TextWriter Error => Console.Error;
+
+        public TextReader In => Console.In;
+
+        public bool IsInputRedirected => Console.IsInputRedirected;
+
+        public bool IsOutputRedirected => Console.IsOutputRedirected;
+
+        public bool IsErrorRedirected => Console.IsErrorRedirected;
+
+        public ConsoleColor ForegroundColor { get => Console.ForegroundColor; set => Console.ForegroundColor = value; }
+        public ConsoleColor BackgroundColor { get => Console.BackgroundColor; set => Console.BackgroundColor = value; }
+
+        public event ConsoleCancelEventHandler CancelKeyPress
+        {
+            add => Console.CancelKeyPress += value;
+            remove => Console.CancelKeyPress -= value;
+        }
+
+        private void SetForeColor(string colorName)
         {
             switch (colorName.ToLowerInvariant())
             {
                 case "b":
                 case "blue":
-                    Console.ForegroundColor = ConsoleColor.Blue;
+                    ForegroundColor = ConsoleColor.Blue;
                     break;
 
                 case "r":
                 case "red":
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    ForegroundColor = ConsoleColor.Red;
                     break;
 
                 case "n":
                 case "green":
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    ForegroundColor = ConsoleColor.Green;
                     break;
 
                 case "w":
                 case "white":
-                    Console.ForegroundColor = ConsoleColor.White;
+                    ForegroundColor = ConsoleColor.White;
                     break;
 
                 case "y":
                 case "yellow":
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    ForegroundColor = ConsoleColor.Yellow;
                     break;
 
                 case "m":
                 case "magenta":
-                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    ForegroundColor = ConsoleColor.Magenta;
                     break;
 
                 case "c":
                 case "cyan":
-                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    ForegroundColor = ConsoleColor.Cyan;
                     break;
 
                 case "g":
                 case "gray":
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    ForegroundColor = ConsoleColor.Gray;
                     break;
 
                 case "db":
                 case "darkblue":
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    ForegroundColor = ConsoleColor.DarkBlue;
                     break;
 
                 case "dr":
                 case "darkred":
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    ForegroundColor = ConsoleColor.DarkRed;
                     break;
 
                 case "dn":
                 case "darkgreen":
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    ForegroundColor = ConsoleColor.DarkGreen;
                     break;
 
                 case "dy":
                 case "darkyellow":
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    ForegroundColor = ConsoleColor.DarkYellow;
                     break;
 
                 case "dm":
                 case "darkmagenta":
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    ForegroundColor = ConsoleColor.DarkMagenta;
                     break;
 
                 case "dc":
                 case "darkcyan":
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    ForegroundColor = ConsoleColor.DarkCyan;
                     break;
 
                 case "dg":
                 case "darkgrey":
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    ForegroundColor = ConsoleColor.DarkGray;
                     break;
 
                 case "k":
                 case "black":
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    ForegroundColor = ConsoleColor.Black;
                     break;
             }
         }
 
-        private static void SetBackColor(string colorName)
+        private void SetBackColor(string colorName)
         {
             switch (colorName.ToLowerInvariant())
             {
                 case "b":
                 case "blue":
-                    Console.BackgroundColor = ConsoleColor.Blue;
+                    BackgroundColor = ConsoleColor.Blue;
                     break;
 
                 case "r":
                 case "red":
-                    Console.BackgroundColor = ConsoleColor.Red;
+                    BackgroundColor = ConsoleColor.Red;
                     break;
 
                 case "n":
                 case "green":
-                    Console.BackgroundColor = ConsoleColor.Green;
+                    BackgroundColor = ConsoleColor.Green;
                     break;
 
                 case "w":
                 case "white":
-                    Console.BackgroundColor = ConsoleColor.White;
+                    BackgroundColor = ConsoleColor.White;
                     break;
 
                 case "y":
                 case "yellow":
-                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    BackgroundColor = ConsoleColor.Yellow;
                     break;
 
                 case "m":
                 case "magenta":
-                    Console.BackgroundColor = ConsoleColor.Magenta;
+                    BackgroundColor = ConsoleColor.Magenta;
                     break;
 
                 case "c":
                 case "cyan":
-                    Console.BackgroundColor = ConsoleColor.Cyan;
+                    BackgroundColor = ConsoleColor.Cyan;
                     break;
 
                 case "g":
                 case "gray":
-                    Console.BackgroundColor = ConsoleColor.Gray;
+                    BackgroundColor = ConsoleColor.Gray;
                     break;
 
                 case "db":
                 case "darkblue":
-                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    BackgroundColor = ConsoleColor.DarkBlue;
                     break;
 
                 case "dr":
                 case "darkred":
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    BackgroundColor = ConsoleColor.DarkRed;
                     break;
 
                 case "dn":
                 case "darkgreen":
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    BackgroundColor = ConsoleColor.DarkGreen;
                     break;
 
                 case "dy":
                 case "darkyellow":
-                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                    BackgroundColor = ConsoleColor.DarkYellow;
                     break;
 
                 case "dm":
                 case "darkmagenta":
-                    Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                    BackgroundColor = ConsoleColor.DarkMagenta;
                     break;
 
                 case "dc":
                 case "darkcyan":
-                    Console.BackgroundColor = ConsoleColor.DarkCyan;
+                    BackgroundColor = ConsoleColor.DarkCyan;
                     break;
 
                 case "dg":
                 case "darkgrey":
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    BackgroundColor = ConsoleColor.DarkGray;
                     break;
 
                 case "k":
                 case "black":
-                    Console.BackgroundColor = ConsoleColor.Black;
+                    BackgroundColor = ConsoleColor.Black;
                     break;
             }
         }
@@ -186,9 +209,9 @@ namespace Xutils.ConsoleApp
         /// </summary>
         /// <param name="text">Text to be written on the Console, optionally contaning tags for defining foreground and background colors, and numeric placeholders for replacing with the <paramref name="args"/>.</param>
         /// <param name="args">Additional values which can be replaced in the given <paramref name="text"/> for the equivalent placeholders.</param>
-        public static void WriteLine(string text, params string[] args)
+        public void ColoredWriteLine(string text, params string[] args)
         {
-            Write($"{text}\r\n", args);
+            ColoredWrite($"{text}\r\n", args);
             Console.WriteLine();
         }
 
@@ -197,7 +220,7 @@ namespace Xutils.ConsoleApp
         /// </summary>
         /// <param name="text">Text to be written on the Console, optionally contaning tags for defining foreground and background colors, and numeric placeholders for replacing with the <paramref name="args"/>.</param>
         /// <param name="args">Additional values which can be replaced in the given <paramref name="text"/> for the equivalent placeholders.</param>
-        public static void Write(string text, params string[] args)
+        public void ColoredWrite(string text, params string[] args)
         {
             for (int i = 0, l = args.Length; i < l; i++)
                 text = text.Replace($"{{{i}}}", args[i]);
@@ -213,8 +236,8 @@ namespace Xutils.ConsoleApp
             {
                 if (fragment.NodeType == XmlNodeType.Element)
                 {
-                    var currentForeColor = Console.ForegroundColor;
-                    var currentBackColor = Console.BackgroundColor;
+                    var currentForeColor = ForegroundColor;
+                    var currentBackColor = BackgroundColor;
                     var name = fragment.Name.ToLowerInvariant();
                     switch (name)
                     {
@@ -234,9 +257,9 @@ namespace Xutils.ConsoleApp
                             SetForeColor(fragment.Name);
                             break;
                     }
-                    Write(fragment.InnerXml);
-                    Console.BackgroundColor = currentBackColor;
-                    Console.ForegroundColor = currentForeColor;
+                    ColoredWrite(fragment.InnerXml);
+                    BackgroundColor = currentBackColor;
+                    ForegroundColor = currentForeColor;
                 }
                 else
                 {
@@ -244,5 +267,7 @@ namespace Xutils.ConsoleApp
                 }
             }
         }
+
+        public void ResetColor() => Console.ResetColor();
     }
 }
